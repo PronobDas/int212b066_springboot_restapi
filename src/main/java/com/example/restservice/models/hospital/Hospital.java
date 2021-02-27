@@ -78,16 +78,5 @@ public class Hospital {
         this.createdOn = createdOn;
     }
 
-    @Override
-    public String toString() {
-        return "Hospital{" +
-                "hospitalId='" + hospitalId + '\'' +
-                ", hospitalName='" + hospitalName + '\'' +
-                ", branchName='" + branchName + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", contact='" + contact + '\'' +
-                ", createdOn='" + createdOn + '\'' +
-                '}';
-    }
+
 }
