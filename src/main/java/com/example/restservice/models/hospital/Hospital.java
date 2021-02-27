@@ -78,5 +78,4 @@ public class Hospital {
         this.createdOn = createdOn;
     }
 
-
 }
