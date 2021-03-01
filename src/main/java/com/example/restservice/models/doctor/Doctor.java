@@ -12,6 +12,85 @@ public class Doctor {
     private String speciality;
     private String address;
     private String about;
-    private String profilePicture;
+    //private String profilePicture;
     private Date createdOn;
+
+    public Doctor(String doctorId, String hospitalId, String doctorName, String speciality, String address, String about, Date createdOn) {
+        this.doctorId = doctorId;
+        this.hospitalId = hospitalId;
+        this.doctorName = doctorName;
+        this.speciality = speciality;
+        this.address = address;
+        this.about = about;
+        this.createdOn = createdOn;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "doctorId='" + doctorId + '\'' +
+                ", hospitalId='" + hospitalId + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", speciality='" + speciality + '\'' +
+                ", address='" + address + '\'' +
+                ", about='" + about + '\'' +
+                ", createdOn=" + createdOn +
+                '}';
+    }
 }

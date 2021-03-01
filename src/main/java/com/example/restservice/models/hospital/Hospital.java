@@ -14,7 +14,7 @@ public class Hospital {
     private String contact;
     private Date createdOn;
 
-    public Hospital(String hospitalId, String hospitalName, String branchName, String address, String email, String contact, String createdOn) {
+    public Hospital(String hospitalId, String hospitalName, String branchName, String address, String email, String contact, Date createdOn) {
         this.hospitalId = hospitalId;
         this.hospitalName = hospitalName;
         this.branchName = branchName;
@@ -72,12 +72,24 @@ public class Hospital {
         this.contact = contact;
     }
 
-    public String getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "hospitalId='" + hospitalId + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", branchName='" + branchName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", contact='" + contact + '\'' +
+                ", createdOn=" + createdOn +
+                '}';
+    }
 }
