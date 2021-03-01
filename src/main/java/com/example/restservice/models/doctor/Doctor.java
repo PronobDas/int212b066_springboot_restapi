@@ -2,6 +2,8 @@ package com.example.restservice.models.doctor;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "doctors")
 public class Doctor {
     private String doctorId;
@@ -11,5 +13,5 @@ public class Doctor {
     private String address;
     private String about;
     private String profilePicture;
-    private String createdOn;
+    private Date createdOn;
 }

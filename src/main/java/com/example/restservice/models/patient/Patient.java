@@ -2,6 +2,8 @@ package com.example.restservice.models.patient;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "patients")
 public class Patient {
     private String regId;
@@ -9,14 +11,14 @@ public class Patient {
     private String hospitalId;
     private String upi; // Universal Patient Identifier
     private String patientName;
-    private String regDatetime;
-    private String dateOfBirth;
-    private int age;
+    private Date regDatetime;
+    private Date dateOfBirth;
+    private long age;
     private String gender;
     private String occupation;
     private String healthInsuranceNo;
     private String healthCareProvider;
     private String address;
     private String contactNo;
-    private String createdOn;
+    private Date createdOn;
 }

@@ -2,6 +2,8 @@ package com.example.restservice.models.hospital;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "hospitals")
 public class Hospital {
     private String hospitalId;
@@ -10,7 +12,7 @@ public class Hospital {
     private String address;
     private String email;
     private String contact;
-    private String createdOn;
+    private Date createdOn;
 
     public Hospital(String hospitalId, String hospitalName, String branchName, String address, String email, String contact, String createdOn) {
         this.hospitalId = hospitalId;
