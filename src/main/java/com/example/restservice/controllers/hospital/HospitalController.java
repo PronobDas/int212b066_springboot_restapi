@@ -36,7 +36,7 @@ public class HospitalController {
             if (hospitalName == null)
                 hospitalRepository.findAll().forEach(hospitals::add);
             else
-                hospitalRepository.findByHospitalName(hospitalName).forEach(hospitals::add);
+                hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
 
             if (hospitals.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

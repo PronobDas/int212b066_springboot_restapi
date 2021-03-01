@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface HospitalRepository extends MongoRepository<Hospital, String> {
-    List<Hospital> findByHospitalId(String hospital_id);
-    List<Hospital> findByHospitalName(String hospital_name);
+    List<Hospital> findByHospitalId(String hospitalId);
+    List<Hospital> findByHospitalNameContaining(String hospitalName);
 }
