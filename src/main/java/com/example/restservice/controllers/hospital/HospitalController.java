@@ -31,14 +31,14 @@ public class HospitalController {
     }
 
     @GetMapping("/hospitals")
-    public ResponseEntity<List<Hospital>> getAllHospitals(@RequestParam(required = false) String hospitalName) {
+    public ResponseEntity<List<Hospital>> getAllHospitals() {
         try {
             List<Hospital> hospitals = new ArrayList<Hospital>();
 
-            if (hospitalName == null)
+            //if (hospitalName == null)
                 hospitalRepository.findAll().forEach(hospitals::add);
-            else
-                hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
+            //else
+            //    hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
 
             if (hospitals.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,7 +50,7 @@ public class HospitalController {
         }
     }
 
-    @GetMapping("/hospitals/?hospitalId={hospitalId}")
+    @GetMapping("/hospitals/{hospitalId}")
     public ResponseEntity<Hospital> getHospitalById(@PathVariable("hospitalId") String hospitalId) {
         Optional<Hospital> hospitalData = hospitalRepository.findByHospitalId(hospitalId);
         if (hospitalData.isPresent()) {
@@ -61,7 +61,7 @@ public class HospitalController {
         }
     }
 
-    @GetMapping("/hospitals/?hospitalName={hospitalName}")
+    @GetMapping("/hospitals/{hospitalName}")
     public ResponseEntity<List<Hospital>> getHospitalByName(@PathVariable("hospitalName") String hospitalName) {
         try {
             List<Hospital> hospitals = new ArrayList<Hospital>();
@@ -75,6 +75,60 @@ public class HospitalController {
             return new ResponseEntity<>(hospitals, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/hospitals/{hospitalId}")
+    public ResponseEntity<Hospital> updateHospital(@PathVariable("hospitalId") String hospitalId, @RequestBody Hospital hospital) {
+        Optional<Hospital> hospitalData = hospitalRepository.findByHospitalId(hospitalId);
+        if (hospitalData.isPresent()){
+            Hospital _hospital = hospitalData.get();
+
+            if (_hospital.getHospitalId() != null){
+                _hospital.setHospitalId(hospital.getHospitalId());
+            }
+            if (_hospital.getHospitalName() != null){
+                _hospital.setHospitalName(hospital.getHospitalName());
+            }
+            if (_hospital.getBranchName() != null){
+                _hospital.setBranchName(hospital.getBranchName());
+            }
+            if (_hospital.getAddress() != null){
+                _hospital.setAddress(hospital.getAddress());
+            }
+            if (_hospital.getEmail() != null){
+                _hospital.setEmail(hospital.getEmail());
+            }
+            if (_hospital.getContact() != null){
+                _hospital.setContact(hospital.getContact());
+            }
+            if (_hospital.getCreatedOn() != null){
+                _hospital.setCreatedOn(hospital.getCreatedOn());
+            }
+            return new ResponseEntity<>(hospitalRepository.save(_hospital), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/hospitals/{hospitalId}")
+    public ResponseEntity<HttpStatus> deleteHospital(@PathVariable("hospitalId") String hospitalId) {
+        try {
+            hospitalRepository.deleteById(hospitalId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/hospitals")
+    public ResponseEntity<HttpStatus> deleteAllHospitals() {
+        try {
+            hospitalRepository.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

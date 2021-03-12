@@ -13,9 +13,9 @@ public class Doctor {
     private String address;
     private String about;
     //private String profilePicture;
-    private Date createdOn;
+    private String createdOn;
 
-    public Doctor(String doctorId, String hospitalId, String doctorName, String speciality, String address, String about, Date createdOn) {
+    public Doctor(String doctorId, String hospitalId, String doctorName, String speciality, String address, String about, String createdOn) {
         this.doctorId = doctorId;
         this.hospitalId = hospitalId;
         this.doctorName = doctorName;
@@ -73,11 +73,11 @@ public class Doctor {
         this.about = about;
     }
 
-    public Date getCreatedOn() {
+    public String getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
 

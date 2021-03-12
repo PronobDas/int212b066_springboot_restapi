@@ -12,9 +12,9 @@ public class Hospital {
     private String address;
     private String email;
     private String contact;
-    private Date createdOn;
+    private String createdOn;
 
-    public Hospital(String hospitalId, String hospitalName, String branchName, String address, String email, String contact, Date createdOn) {
+    public Hospital(String hospitalId, String hospitalName, String branchName, String address, String email, String contact, String createdOn) {
         this.hospitalId = hospitalId;
         this.hospitalName = hospitalName;
         this.branchName = branchName;
@@ -72,11 +72,11 @@ public class Hospital {
         this.contact = contact;
     }
 
-    public Date getCreatedOn() {
+    public String getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
 

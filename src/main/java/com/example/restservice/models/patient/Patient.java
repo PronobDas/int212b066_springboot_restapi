@@ -11,8 +11,8 @@ public class Patient {
     private String hospitalId;
     private String upi; // Universal Patient Identifier
     private String patientName;
-    private Date regDatetime;
-    private Date dateOfBirth;
+    private String regDatetime;
+    private String dateOfBirth;
     private Long age;
     private String gender;
     private String occupation;
@@ -20,9 +20,9 @@ public class Patient {
     private String healthCareProvider;
     private String address;
     private String contactNo;
-    private Date createdOn;
+    private String createdOn;
 
-    public Patient(String regId, String doctorId, String hospitalId, String upi, String patientName, Date regDatetime, Date dateOfBirth, Long age, String gender, String occupation, String healthInsuranceNo, String healthCareProvider, String address, String contactNo, Date createdOn) {
+    public Patient(String regId, String doctorId, String hospitalId, String upi, String patientName, String regDatetime, String dateOfBirth, Long age, String gender, String occupation, String healthInsuranceNo, String healthCareProvider, String address, String contactNo, String createdOn) {
         this.regId = regId;
         this.doctorId = doctorId;
         this.hospitalId = hospitalId;
@@ -80,19 +80,19 @@ public class Patient {
         this.patientName = patientName;
     }
 
-    public Date getRegDatetime() {
+    public String getRegDatetime() {
         return regDatetime;
     }
 
-    public void setRegDatetime(Date regDatetime) {
+    public void setRegDatetime(String regDatetime) {
         this.regDatetime = regDatetime;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -152,11 +152,11 @@ public class Patient {
         this.contactNo = contactNo;
     }
 
-    public Date getCreatedOn() {
+    public String getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
 
