@@ -1,7 +1,6 @@
 package com.example.restservice.controllers.doctor;
 
 import com.example.restservice.models.doctor.Doctor;
-import com.example.restservice.models.hospital.Hospital;
 import com.example.restservice.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,27 +28,21 @@ public class DoctorController {
         }
     }
     @GetMapping("/doctors")
-    public ResponseEntity<List<Doctor>> getAllDoctors(@RequestParam(required = false) String doctorName) {
+    public ResponseEntity<List<Doctor>> getAllDoctors() {
         try {
             List<Doctor> doctors = new ArrayList<Doctor>();
-
-            if (doctorName == null) {
-                doctorRepository.findAll().forEach(doctors::add);
-            } else {
-                doctorRepository.findByDoctorNameContaining(doctorName).forEach(doctors::add);
-            }
+            doctorRepository.findAll().forEach(doctors::add);
 
             if (doctors.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-
             return new ResponseEntity<>(doctors, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/doctors/{doctorId}")
+    @GetMapping("/doctors/id/{doctorId}")
     public ResponseEntity<Doctor> getDoctorByDoctorId(@PathVariable("doctorId") String doctorId) {
         Optional<Doctor> doctorData = doctorRepository.findByDoctorId(doctorId);
 
@@ -63,12 +56,11 @@ public class DoctorController {
     @GetMapping("/doctors/name/{doctorName}")
     public ResponseEntity<List<Doctor>> getDoctorByDoctorName(@PathVariable("doctorName") String doctorName) {
         List<Doctor> doctors = new ArrayList<Doctor>();
-        List<Doctor> doctorData = doctorRepository.findByDoctorNameContaining(doctorName);
+        doctorRepository.findByDoctorNameContaining(doctorName).forEach(doctors::add);
 
-        if (!doctorData.isEmpty()) {
-            doctorRepository.findByDoctorNameContaining(doctorName).forEach(doctors::add);
+        if (!doctors.isEmpty()) {
+            //doctorRepository.findByDoctorNameContaining(doctorName).;
             return new ResponseEntity<>(doctors, HttpStatus.OK);
-
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

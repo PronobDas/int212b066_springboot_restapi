@@ -1,11 +1,13 @@
 package com.example.restservice.models.doctor;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document(collection = "doctors")
 public class Doctor {
+    @Id
     private String doctorId;
     private String hospitalId;
     private String doctorName;

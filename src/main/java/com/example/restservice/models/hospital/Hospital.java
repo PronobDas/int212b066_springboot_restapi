@@ -1,11 +1,13 @@
 package com.example.restservice.models.hospital;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document(collection = "hospitals")
 public class Hospital {
+    @Id
     private String hospitalId;
     private String hospitalName;
     private String branchName;

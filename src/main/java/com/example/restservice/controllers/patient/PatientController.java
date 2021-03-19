@@ -1,6 +1,5 @@
 package com.example.restservice.controllers.patient;
 
-import com.example.restservice.models.hospital.Hospital;
 import com.example.restservice.models.patient.Patient;
 import com.example.restservice.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class PatientController {
         }
     }
 
-    @GetMapping("/patients/{upi}")
+    @GetMapping("/patients/id/{upi}")
     public ResponseEntity<Patient> getPatientById(@PathVariable("upi") String upi) {
         Optional<Patient> patientData = patientRepository.findByUpi(upi);
 
@@ -58,23 +57,21 @@ public class PatientController {
         }
     }
 
-    @GetMapping("/patients/{name}")
-    public ResponseEntity<List<Patient>> getByPatientName(@PathVariable("patientName") String patientName) {
+    @GetMapping("/patients/name/{patientName}")
+    public ResponseEntity<List<Patient>> getPatientByName(@PathVariable("patientName") String patientName) {
         List<Patient> patients = new ArrayList<Patient>();
-        List<Patient> patientData = patientRepository.findByPatientNameContaining(patientName);
+        patientRepository.findByPatientNameContaining(patientName).forEach(patients::add);
 
-        if (!patientData.isEmpty()) {
-            patientRepository.findByPatientNameContaining(patientName).forEach(patients::add);
+        if (!patients.isEmpty()) {
+            //patientRepository.findByPatientNameContaining(patientName).forEach(patients::add);
             return new ResponseEntity<>(patients, HttpStatus.OK);
-
         } else {
-
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/patients/namedob")
-    public ResponseEntity<Patient> getByPatientNameandDob(@RequestBody Patient p) {
+    @GetMapping("/patients/{patientName}/{dateOfBirth}")
+    public ResponseEntity<Patient> getPatientByNameDateOfBirth(@RequestBody Patient p) {
         //String date = p.getDateOfBirth();
         //SimpleDateFormat formatter=new SimpleDateFormat("dd-MM-yyyy");
         //Date date1=formatter.parse(date);
@@ -87,7 +84,7 @@ public class PatientController {
         }
     }
 
-    @PutMapping("/patients/{id}")
+    @PutMapping("/patients/{upi}")
     public ResponseEntity<Patient> updatePatient(@PathVariable("upi") String upi, @RequestBody Patient patient) {
         Optional<Patient> patientData = patientRepository.findByUpi(upi);
 
@@ -140,7 +137,7 @@ public class PatientController {
         }
     }
 
-    @DeleteMapping("/patients/{id}")
+    @DeleteMapping("/patients/{upi}")
     public ResponseEntity<HttpStatus> deletePatient(@PathVariable("upi") String upi) {
         try {
             patientRepository.deleteById(upi);
@@ -159,7 +156,4 @@ public class PatientController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
 }

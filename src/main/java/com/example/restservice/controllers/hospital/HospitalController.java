@@ -1,8 +1,6 @@
 package com.example.restservice.controllers.hospital;
 
-
 import com.example.restservice.models.hospital.Hospital;
-import com.example.restservice.models.tutorial.Tutorial;
 import com.example.restservice.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,10 +33,7 @@ public class HospitalController {
         try {
             List<Hospital> hospitals = new ArrayList<Hospital>();
 
-            //if (hospitalName == null)
-                hospitalRepository.findAll().forEach(hospitals::add);
-            //else
-            //    hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
+            hospitalRepository.findAll().forEach(hospitals::add);
 
             if (hospitals.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,10 +45,11 @@ public class HospitalController {
         }
     }
 
-    @GetMapping("/hospitals/{hospitalId}")
+    @GetMapping("/hospitals/id/{hospitalId}")
     public ResponseEntity<Hospital> getHospitalById(@PathVariable("hospitalId") String hospitalId) {
         Optional<Hospital> hospitalData = hospitalRepository.findByHospitalId(hospitalId);
         if (hospitalData.isPresent()) {
+            //hospitalRepository.findByHospitalNameContaining(hospitalId).forEach(hospital::add);
             return new ResponseEntity<>(hospitalData.get(), HttpStatus.OK);
         }
         else {
@@ -61,20 +57,17 @@ public class HospitalController {
         }
     }
 
-    @GetMapping("/hospitals/{hospitalName}")
-    public ResponseEntity<List<Hospital>> getHospitalByName(@PathVariable("hospitalName") String hospitalName) {
-        try {
-            List<Hospital> hospitals = new ArrayList<Hospital>();
+    @GetMapping("/hospitals/name/{hospitalName}")
+    public ResponseEntity<List<Hospital>> getHospitalByHospitalName(@PathVariable("hospitalName") String hospitalName) {
+        List<Hospital> hospitals = new ArrayList<Hospital>();
+        hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
 
-            hospitalRepository.findByHospitalNameContaining(hospitalName).forEach(hospitals::add);
-
-            if (hospitals.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
+        if (!hospitals.isEmpty()) {
+            //hospitalRepository.findByHospitalNameContaining(hospitalName).;
             return new ResponseEntity<>(hospitals, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

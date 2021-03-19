@@ -1,5 +1,6 @@
 package com.example.restservice.models.patient;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ public class Patient {
     private String regId;
     private String doctorId;
     private String hospitalId;
+    @Id
     private String upi; // Universal Patient Identifier
     private String patientName;
     private String regDatetime;
