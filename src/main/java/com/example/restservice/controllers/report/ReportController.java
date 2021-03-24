@@ -36,7 +36,7 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/reports/{id}")
+    @GetMapping("/reports/id/{id}")
     public ResponseEntity<Report> getReportById(@PathVariable("id") String id) {
         Optional<Report> reportData = reportRepository.findById(id);
 
@@ -61,8 +61,8 @@ public class ReportController {
     @Autowired
     PatientRepository patientRepository;
 
-    @PostMapping("/reports/namedob")
-    public ResponseEntity<Report> getReportByPatientNameandDob(@RequestBody Patient p) {
+    @GetMapping("/reports/namedob")
+    public ResponseEntity<Report> getReportByPatientNameAndDob(@RequestBody Patient p) {
         Optional<Patient> patientData = patientRepository.findByPatientNameAndDateOfBirth(p.getPatientName(), p.getDateOfBirth());
         if (patientData.isPresent()) {
             Patient patient = patientData.get();

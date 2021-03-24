@@ -19,6 +19,20 @@ public class MedicineController {
     @Autowired
     MedicineRepository medicineRepository;
 
+    @PostMapping("/medicines")
+    public ResponseEntity<Medicine> createMedicine(@RequestBody Medicine medicine) {
+        try {
+            Medicine _medicine = medicineRepository.save(new Medicine(
+                    medicine.getDrugName(),
+                    medicine.getUnit(),
+                    medicine.getDosage()
+            ));
+            return new ResponseEntity<>(_medicine, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/medicines")
     public ResponseEntity<List<Medicine>> getAllMedicines() {
         try {
@@ -34,27 +48,13 @@ public class MedicineController {
         }
     }
 
-    @GetMapping("/medicines/{id}")
+    @GetMapping("/medicines/id/{id}")
     public ResponseEntity<Medicine> getMedicine(@PathVariable("id") String id) {
         Optional<Medicine> medicineData = medicineRepository.findById(id);
         if (medicineData.isPresent()) {
             return new ResponseEntity<>(medicineData.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping("/medicines")
-    public ResponseEntity<Medicine> createMedicine(@RequestBody Medicine medicine) {
-        try {
-            Medicine _medicine = medicineRepository.save(new Medicine(
-                    medicine.getDrugName(),
-                    medicine.getUnit(),
-                    medicine.getDosage()
-            ));
-            return new ResponseEntity<>(_medicine, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
